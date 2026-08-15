@@ -15,7 +15,7 @@ body{margin:0;background:#f6f7f8;font-family:-apple-system,BlinkMacSystemFont,"S
 .hidden{display:none!important}.hint{text-align:center;font-size:12px;color:#7a838d;margin:12px 0 0}.back,.again{border:0;background:#eef1f4;border-radius:12px;padding:12px 15px;font-weight:700;margin-top:14px;color:#333}
 .result{text-align:center}.icon{font-size:42px}.rtitle{font-size:23px;font-weight:900;line-height:1.45;margin:6px 0 10px}.rtext{text-align:left;font-size:15px;line-height:1.8}
 .summary{background:#f4f8ff;border-radius:14px;padding:14px;text-align:left;margin:14px 0}.summary strong{font-size:23px;color:#0e55ac}.summary small{color:#68717b}
-.cta{display:block;text-decoration:none;background:#1769d2;color:#fff!important;border-radius:13px;padding:15px;font-size:16px;font-weight:800;margin-top:14px}.subcta{display:block;text-decoration:none;border:1.5px solid #1769d2;color:#1769d2!important;border-radius:13px;padding:13px;font-size:14px;font-weight:800;margin-top:10px}
+.cta{display:block;text-decoration:none;background:#1769d2;color:#fff!important;border-radius:13px;padding:15px;font-size:16px;font-weight:800;margin-top:14px}
 .trust{margin-top:16px;padding:13px;border-radius:12px;background:#fafbfc;text-align:left;font-size:12px;line-height:1.7;color:#59616a}.note{font-size:11px;line-height:1.7;color:#7a838d;margin-top:18px}
 </style>
 </head>
@@ -42,9 +42,8 @@ body{margin:0;background:#f6f7f8;font-family:-apple-system,BlinkMacSystemFont,"S
 
 <section id="res" class="hidden result">
 <div class="icon" id="icon"></div><div class="rtitle" id="title"></div><div class="rtext" id="text"></div><div class="summary" id="sum"></div>
-<a class="cta" href="https://www.maebashifp.com/" target="_blank" rel="noopener">無料で詳しく相談する</a>
-<a class="subcta" href="https://www.maebashifp.com/" target="_blank" rel="noopener">通信費以外の家計相談も見る</a>
-<div class="trust">運営・相談対応：スマイルFP事務所<br>通信費だけでなく、家計全体の固定費についても確認できます。現在の契約を継続した方がよい場合は、無理な乗り換えをおすすめしません。</div>
+<a class="cta" id="mailCta" href="#">無料で詳しく相談する</a>
+<div class="trust">相談はメールで受け付けます。ボタンを押すと、件名と診断結果の一部が入ったメール作成画面が開きます。<br>運営・相談対応：スマイルFP事務所</div>
 <button class="again" id="again">もう一度診断する</button>
 </section>
 
@@ -56,41 +55,39 @@ body{margin:0;background:#f6f7f8;font-family:-apple-system,BlinkMacSystemFont,"S
 const s={};
 const qs=[null,document.getElementById('q1'),document.getElementById('q2'),document.getElementById('q3')];
 const bar=document.getElementById('bar'),res=document.getElementById('res');
-const labels={
-'lt5000':'5,000円未満',
-'5000-10000':'5,000～10,000円',
-'10000-20000':'10,000～20,000円',
-'20000-30000':'20,000～30,000円',
-'30000plus':'30,000円以上'
-};
+const labels={'lt5000':'5,000円未満','5000-10000':'5,000～10,000円','10000-20000':'10,000～20,000円','20000-30000':'20,000～30,000円','30000plus':'30,000円以上'};
+
 function show(n){
  [qs[1],qs[2],qs[3],res].forEach(x=>x.classList.add('hidden'));
  if(n<=3){qs[n].classList.remove('hidden');bar.style.width=(n*33.3)+'%'}
  else{res.classList.remove('hidden');bar.style.width='100%'}
  window.scrollTo({top:0,behavior:'smooth'});
 }
+
 function result(){
  const l=Number(s.lines),mid=Number(s.billMid||0),p=mid/l;
  let t,x,i;
- if(s.device!=='no'){
-   i='🔎';t='まず「通信料金だけ」を確認しましょう';
-   x='端末代が含まれている可能性があるため、この金額だけでは通信費が高いとは判断できません。料金明細で、端末代を除いた通信料金を確認すると正確に比較できます。';
- }else if(p>=4500){
-   i='💡';t='見直し余地がありそうです';
-   x='1回線あたりの負担が比較的高い可能性があります。データ使用量や通話量、現在の割引を確認すると、通信費を下げられる余地があるかもしれません。';
- }else if(p>=2800){
-   i='✅';t='条件次第で見直せる可能性があります';
-   x='現在の料金は極端に高いとは限りませんが、使い方や割引状況によってはさらに負担を抑えられる可能性があります。';
- }else{
-   i='👍';t='現在でも比較的低い水準です';
-   x='料金帯だけを見ると、すでに抑えられている可能性があります。通信品質や必要なデータ量も含め、無理な乗り換えはおすすめしません。';
- }
+ if(s.device!=='no'){i='🔎';t='まず「通信料金だけ」を確認しましょう';x='端末代が含まれている可能性があるため、この金額だけでは通信費が高いとは判断できません。料金明細で、端末代を除いた通信料金を確認すると正確に比較できます。';}
+ else if(p>=4500){i='💡';t='見直し余地がありそうです';x='1回線あたりの負担が比較的高い可能性があります。データ使用量や通話量、現在の割引を確認すると、通信費を下げられる余地があるかもしれません。';}
+ else if(p>=2800){i='✅';t='条件次第で見直せる可能性があります';x='現在の料金は極端に高いとは限りませんが、使い方や割引状況によってはさらに負担を抑えられる可能性があります。';}
+ else{i='👍';t='現在でも比較的低い水準です';x='料金帯だけを見ると、すでに抑えられている可能性があります。通信品質や必要なデータ量も含め、無理な乗り換えはおすすめしません。';}
  document.getElementById('icon').textContent=i;
  document.getElementById('title').textContent=t;
  document.getElementById('text').textContent=x;
  document.getElementById('sum').innerHTML='現在のお支払い<br><strong>'+labels[s.bill]+' / 月</strong><br><small>'+l+'回線'+(l===5?'（5台以上として判定）':'')+'</small>';
+
+ const subject = encodeURIComponent('スマホ料金の無料相談');
+ const body = encodeURIComponent(
+   'スマホ代30秒チェックを利用しました。\n\n' +
+   '利用回線数：' + l + '回線\n' +
+   '現在の支払額：' + labels[s.bill] + '／月\n' +
+   '端末代：' + (s.device==='no'?'含まれていない':s.device==='yes'?'含まれている':'わからない') + '\n\n' +
+   '詳しい見直しについて相談を希望します。'
+ );
+ document.getElementById('mailCta').href='mailto:mental.gunma@gmail.com?subject='+subject+'&body='+body;
  show(4);
 }
+
 document.addEventListener('click',e=>{
  const b=e.target.closest('.opt');
  if(b){
