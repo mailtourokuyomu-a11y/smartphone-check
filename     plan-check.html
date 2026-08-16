@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>スマホ料金・見直し診断</title>
+<meta name="description" content="6問でスマホ料金の見直し方向を簡易診断。">
+<style>
+:root{--bg:#f6f7f8;--card:#fff;--text:#17191c;--muted:#6f7780;--main:#1769d2;--line:#dce2e8;--soft:#eef5ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}
+.wrap{max-width:580px;margin:0 auto;padding:18px 14px 44px}.card{background:var(--card);border:1px solid #e3e7eb;border-radius:18px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.badge{display:inline-block;background:#eaf3ff;color:#145fbf;font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px}
+h1{font-size:28px;line-height:1.3;margin:12px 0 6px}.lead{color:var(--muted);font-size:14px;line-height:1.7;margin:0}
+.progress{height:6px;background:#e8edf2;border-radius:999px;overflow:hidden;margin:18px 0}.progress span{display:block;height:100%;background:var(--main);width:16.6%;transition:.2s}
+.step{font-size:12px;font-weight:800;color:var(--main)}.q{font-size:20px;font-weight:800;line-height:1.5;margin:7px 0 14px}.opts{display:grid;gap:10px}
+.opt{width:100%;appearance:none;-webkit-appearance:none;border:1.5px solid var(--line);background:#fff;color:var(--text);border-radius:13px;padding:15px 14px;font-size:16px;font-weight:700;text-align:left}
+.opt:active{background:#f1f7ff;border-color:var(--main)}.hidden{display:none!important}.back,.again{border:0;background:#eef1f4;color:#333;border-radius:12px;padding:12px 15px;font-weight:700;margin-top:14px}
+.result{text-align:center}.icon{font-size:44px}.type{display:inline-block;margin-top:6px;background:#eef5ff;color:#0f57ae;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800}
+.rtitle{font-size:24px;font-weight:900;line-height:1.45;margin:10px 0}.rtext{text-align:left;font-size:15px;line-height:1.8}
+.box{background:#f4f8ff;border-radius:14px;padding:15px;text-align:left;margin:14px 0}.box strong{display:block;color:#0e55ac;font-size:18px;margin-bottom:6px}
+.cta{display:block;text-decoration:none;background:var(--main);color:#fff!important;border-radius:13px;padding:15px;font-size:16px;font-weight:800;margin-top:14px}
+.subcta{width:100%;border:1.5px solid var(--main);background:#fff;color:var(--main);border-radius:13px;padding:14px;font-size:15px;font-weight:800;margin-top:10px}
+.note{font-size:11px;line-height:1.7;color:#7a838d;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<span class="badge">6問・文字入力なし・無料</span>
+<h1>スマホ料金<br>見直し診断</h1>
+<p class="lead">「今のまま」「プラン変更」「オンライン専用」「格安SIM比較」のうち、どの方向が合いそうかを簡易診断します。</p>
+<div class="progress"><span id="bar"></span></div>
+
+<section id="q1"><div class="step">QUESTION 1 / 6</div><div class="q">現在のスマホ会社はどのタイプですか？</div><div class="opts">
+<button class="opt" data-k="carrier" data-v="major">大手キャリア</button>
+<button class="opt" data-k="carrier" data-v="online">オンライン専用プラン</button>
+<button class="opt" data-k="carrier" data-v="mvno">格安SIM・MVNO</button>
+<button class="opt" data-k="carrier" data-v="unknown">よく分からない</button>
+</div></section>
+
+<section id="q2" class="hidden"><div class="step">QUESTION 2 / 6</div><div class="q">1回線あたり、月にどのくらいデータを使いますか？</div><div class="opts">
+<button class="opt" data-k="data" data-v="3">3GB以下</button>
+<button class="opt" data-k="data" data-v="10">4〜10GB</button>
+<button class="opt" data-k="data" data-v="30">11〜30GB</button>
+<button class="opt" data-k="data" data-v="50">31〜50GB</button>
+<button class="opt" data-k="data" data-v="100">50GB超・分からない</button>
+</div><button class="back" data-go="1">← 戻る</button></section>
+
+<section id="q3" class="hidden"><div class="step">QUESTION 3 / 6</div><div class="q">通常の電話はどのくらい使いますか？</div><div class="opts">
+<button class="opt" data-k="call" data-v="low">ほとんど使わない</button>
+<button class="opt" data-k="call" data-v="mid">短い通話を時々する</button>
+<button class="opt" data-k="call" data-v="high">長電話・通話が多い</button>
+</div><button class="back" data-go="2">← 戻る</button></section>
+
+<section id="q4" class="hidden"><div class="step">QUESTION 4 / 6</div><div class="q">家族割・光回線とのセット割などを使っていますか？</div><div class="opts">
+<button class="opt" data-k="discount" data-v="yes">利用している</button>
+<button class="opt" data-k="discount" data-v="no">利用していない</button>
+<button class="opt" data-k="discount" data-v="unknown">分からない</button>
+</div><button class="back" data-go="3">← 戻る</button></section>
+
+<section id="q5" class="hidden"><div class="step">QUESTION 5 / 6</div><div class="q">店舗での対面サポートは必要ですか？</div><div class="opts">
+<button class="opt" data-k="support" data-v="need">必要</button>
+<button class="opt" data-k="support" data-v="maybe">あれば安心</button>
+<button class="opt" data-k="support" data-v="none">なくても大丈夫</button>
+</div><button class="back" data-go="4">← 戻る</button></section>
+
+<section id="q6" class="hidden"><div class="step">QUESTION 6 / 6</div><div class="q">スマホ料金で最も重視することは？</div><div class="opts">
+<button class="opt" data-k="priority" data-v="price">とにかく料金を下げたい</button>
+<button class="opt" data-k="priority" data-v="balance">料金と安心感のバランス</button>
+<button class="opt" data-k="priority" data-v="quality">通信品質・サポート優先</button>
+</div><button class="back" data-go="5">← 戻る</button></section>
+
+<section id="res" class="hidden result">
+<div class="icon" id="icon"></div><div class="type" id="type"></div><div class="rtitle" id="title"></div><div class="rtext" id="text"></div>
+<div class="box"><strong>次に確認するとよいこと</strong><div id="next"></div></div>
+<a id="mail" class="cta" href="#">この結果で無料相談する</a>
+<button id="again" class="subcta">もう一度診断する</button>
+</section>
+
+<p class="note">※この診断は一般的な利用傾向から見直し方向を示す簡易診断です。特定の通信会社・料金プランを推奨するものではありません。実際の比較には、最新料金、通信エリア、通話オプション、端末代、各種割引、初期費用、解約条件等の確認が必要です。</p>
+</div></div>
+
+<script>
+(()=>{
+const s={}, email='mental.gunma@gmail.com';
+const ids=['q1','q2','q3','q4','q5','q6','res'];
+const bar=document.getElementById('bar');
+function show(n){ids.forEach(id=>document.getElementById(id).classList.add('hidden')); if(n<=6){document.getElementById('q'+n).classList.remove('hidden');bar.style.width=(n/6*100)+'%'}else{document.getElementById('res').classList.remove('hidden');bar.style.width='100%'} window.scrollTo({top:0,behavior:'smooth'});}
+function result(){
+ let mv=0,on=0,keep=0,plan=0;
+ if(s.carrier==='major'){plan+=2;mv+=1;on+=1}
+ if(s.carrier==='online'){keep+=2;mv+=1}
+ if(s.carrier==='mvno'){keep+=2}
+ if(s.carrier==='unknown'){plan+=1}
+ const d=Number(s.data);
+ if(d<=10){mv+=3;on+=1}else if(d<=30){on+=2;mv+=1}else if(d<=50){on+=2;keep+=1}else{keep+=2;plan+=1}
+ if(s.call==='low'){mv+=2;on+=1}else if(s.call==='mid'){on+=1;plan+=1}else{plan+=2;keep+=1}
+ if(s.discount==='yes'){keep+=2;plan+=1}else if(s.discount==='no'){mv+=1;on+=1}else{plan+=1}
+ if(s.support==='need'){keep+=3;plan+=2}else if(s.support==='maybe'){plan+=1;on+=1}else{mv+=2;on+=2}
+ if(s.priority==='price'){mv+=3;on+=2}else if(s.priority==='balance'){on+=2;plan+=2}else{keep+=3;plan+=1}
+ const best=Object.entries({keep,plan,online:on,mvno:mv}).sort((a,b)=>b[1]-a[1])[0][0];
+ let icon,type,title,text,next;
+ if(best==='keep'){icon='👍';type='現状維持候補';title='今の契約を続ける選択も十分ありそうです';text='料金だけでなく、通信品質・対面サポート・現在の割引を重視する使い方です。無理に乗り換えるより、まず今の契約内で不要なオプションがないか確認する方が向いています。';next='現在の月額料金、不要なオプション、家族割・セット割の適用状況を確認してください。';}
+ else if(best==='plan'){icon='🔧';type='プラン見直し候補';title='まずは今の会社の料金プラン見直しがおすすめです';text='通信会社そのものを変えなくても、容量や通話オプションを合わせ直すだけで負担が下がる可能性があります。';next='現在のデータ使用量と契約容量、通話オプション、割引条件を比較してみましょう。';}
+ else if(best==='online'){icon='📲';type='オンライン専用プラン候補';title='オンライン専用プランも比較する価値があります';text='店舗サポートへの依存が低く、一定のデータ量を使うタイプです。料金と通信品質のバランスを取りやすい可能性があります。';next='現在の回線と同程度の通信品質が必要か、サポートをオンライン中心にできるかを確認しましょう。';}
+ else{icon='💡';type='格安SIM比較候補';title='格安SIMを含めて比較する価値が高そうです';text='料金を重視し、データ使用量やサポート条件も格安SIMと相性がよい傾向です。ただし、現在の割引や端末条件を含めて総額で比較することが大切です。';next='月間データ量、通話量、現在の割引、端末残債を確認した上で、具体的な料金比較をすると判断しやすくなります。';}
+ document.getElementById('icon').textContent=icon;document.getElementById('type').textContent=type;document.getElementById('title').textContent=title;document.getElementById('text').textContent=text;document.getElementById('next').textContent=next;
+ const body='スマホ料金・見直し診断を利用しました。\n\n診断結果：'+type+'\n詳しい見直しについて相談を希望します。';
+ document.getElementById('mail').href='mailto:'+email+'?subject='+encodeURIComponent('スマホ料金・見直し診断の相談')+'&body='+encodeURIComponent(body);
+ show(7);
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('.opt'); if(b){s[b.dataset.k]=b.dataset.v; const map={carrier:2,data:3,call:4,discount:5,support:6}; if(b.dataset.k==='priority')result(); else show(map[b.dataset.k]); return;}
+ const bk=e.target.closest('.back'); if(bk)show(Number(bk.dataset.go));
+});
+document.getElementById('again').onclick=()=>{Object.keys(s).forEach(k=>delete s[k]);show(1)};
+show(1);
+})();
+</script>
+</body></html>
