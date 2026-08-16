@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f766e">
+  <title>スマホ代30秒チェック</title>
+  <meta name="description" content="3問・約30秒。今のスマホ料金に見直し余地があるかを無料で簡単チェックできます。">
+  <style>
+    :root{
+      --bg:#f7faf9;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#667085;
+      --line:#e5e7eb;
+      --main:#0f766e;
+      --main2:#115e59;
+      --accent:#ecfdf5;
+      --warn:#92400e;
+      --warnbg:#fffbeb;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(15,23,42,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+      color:var(--text);
+      background:linear-gradient(180deg,#f0fdfa 0,#f7faf9 230px);
+      line-height:1.7;
+    }
+    .wrap{max-width:680px;margin:auto;padding:24px 16px 48px}
+    .hero{padding:16px 4px 8px}
+    .badge{
+      display:inline-block;background:var(--accent);color:var(--main2);
+      font-weight:700;padding:6px 10px;border-radius:999px;font-size:13px
+    }
+    h1{font-size:30px;line-height:1.35;margin:14px 0 8px}
+    .lead{margin:0;color:var(--muted);font-size:15px}
+    .card{
+      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:20px;margin-top:18px;
+    }
+    .step{font-size:13px;color:var(--main);font-weight:800;margin-bottom:4px}
+    .q{font-size:20px;font-weight:800;margin:0 0 14px}
+    .opts{display:grid;gap:10px}
+    label.opt{
+      display:flex;gap:10px;align-items:flex-start;padding:14px 15px;border:1px solid var(--line);
+      border-radius:14px;background:#fff;cursor:pointer;transition:.15s;
+    }
+    label.opt:has(input:checked){border-color:var(--main);background:var(--accent)}
+    input[type=radio]{margin-top:5px;accent-color:var(--main);transform:scale(1.2)}
+    .opt b{display:block}
+    .opt small{color:var(--muted)}
+    button{
+      width:100%;border:0;border-radius:14px;padding:15px 18px;font-size:17px;font-weight:800;
+      background:var(--main);color:#fff;cursor:pointer;margin-top:18px;
+    }
+    button:hover{background:var(--main2)}
+    .note{font-size:12px;color:var(--muted);margin-top:10px}
+    .result{display:none}
+    .result.show{display:block}
+    .score{
+      text-align:center;padding:8px 0 4px
+    }
+    .score .tag{
+      display:inline-block;padding:6px 12px;border-radius:999px;font-weight:800;background:var(--accent);color:var(--main2)
+    }
+    .score h2{font-size:28px;margin:10px 0 6px}
+    .money{
+      font-size:34px;font-weight:900;color:var(--main2);letter-spacing:.02em
+    }
+    .sub{color:var(--muted);font-size:14px}
+    .box{
+      background:#f9fafb;border-radius:14px;padding:14px 16px;margin-top:14px
+    }
+    .box.warn{background:var(--warnbg);color:#78350f}
+    .cta{
+      display:block;text-decoration:none;text-align:center;background:#111827;color:#fff;
+      font-weight:800;border-radius:14px;padding:15px 18px;margin-top:14px
+    }
+    .reset{
+      background:#fff;color:var(--main);border:1px solid var(--main);margin-top:10px
+    }
+    .privacy{
+      font-size:12px;color:var(--muted);text-align:center;margin:18px 4px 0
+    }
+    .footer{font-size:12px;color:var(--muted);text-align:center;margin-top:22px}
+    @media (max-width:420px){
+      h1{font-size:26px}
+      .q{font-size:18px}
+      .card{padding:17px}
+      .money{font-size:30px}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <span class="badge">無料・登録不要・約30秒</span>
+      <h1>スマホ代30秒チェック</h1>
+      <p class="lead">3問に答えるだけ。今のスマホ料金に「見直し余地」があるかを簡単に確認できます。</p>
+    </section>
+
+    <form id="checkForm">
+      <section class="card">
+        <div class="step">Q1 / 3</div>
+        <p class="q">1人あたりの月額料金は？</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="price" value="1" required><span><b>3,000円未満</b><small>すでにかなり抑えられている可能性</small></span></label>
+          <label class="opt"><input type="radio" name="price" value="2"><span><b>3,000〜5,999円</b><small>使い方によって見直し余地あり</small></span></label>
+          <label class="opt"><input type="radio" name="price" value="3"><span><b>6,000〜8,999円</b><small>見直し効果が出る可能性あり</small></span></label>
+          <label class="opt"><input type="radio" name="price" value="4"><span><b>9,000円以上</b><small>大きく見直せる可能性あり</small></span></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="step">Q2 / 3</div>
+        <p class="q">1か月のデータ使用量は？</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="data" value="1" required><span><b>3GB未満</b><small>小容量プラン向き</small></span></label>
+          <label class="opt"><input type="radio" name="data" value="2"><span><b>3〜10GB</b><small>選択肢が多いゾーン</small></span></label>
+          <label class="opt"><input type="radio" name="data" value="3"><span><b>10〜30GB</b><small>中容量プラン向き</small></span></label>
+          <label class="opt"><input type="radio" name="data" value="4"><span><b>30GB超・無制限</b><small>使い方に合うプラン選びが重要</small></span></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="step">Q3 / 3</div>
+        <p class="q">通話の使い方は？</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="call" value="1" required><span><b>ほとんど通話しない</b></span></label>
+          <label class="opt"><input type="radio" name="call" value="2"><span><b>短い通話が中心</b></span></label>
+          <label class="opt"><input type="radio" name="call" value="3"><span><b>通話が多い</b></span></label>
+        </div>
+
+        <button type="submit">診断結果を見る</button>
+        <p class="note">※この診断は料金見直しの可能性を簡易判定するものです。実際の料金は契約内容・端末代・割引・オプション等により異なります。</p>
+      </section>
+    </form>
+
+    <section id="result" class="card result" aria-live="polite">
+      <div class="score">
+        <span id="rankTag" class="tag"></span>
+        <h2 id="resultTitle"></h2>
+        <div id="saving" class="money"></div>
+        <div class="sub">年間削減額の目安（1回線あたり）</div>
+      </div>
+      <div id="advice" class="box"></div>
+      <div class="box warn">
+        実際の削減額は、端末代・家族割・光回線セット割・通話オプション・キャリアメール・データ使用量などで変わります。
+      </div>
+      <a class="cta" href="mailto:mental.gunma@gmail.com?subject=%E3%82%B9%E3%83%9E%E3%83%9B%E4%BB%A3%E8%A6%8B%E7%9B%B4%E3%81%97%E7%9B%B8%E8%AB%87">無料で相談してみる</a>
+      <button type="button" class="reset" onclick="location.reload()">もう一度チェックする</button>
+    </section>
+
+    <p class="privacy">入力内容は送信・保存されず、この端末上だけで判定します。</p>
+    <footer class="footer">スマイルFP事務所合同会社</footer>
+  </main>
+
+  <script>
+    const form = document.getElementById('checkForm');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const price = Number(new FormData(form).get('price'));
+      const data  = Number(new FormData(form).get('data'));
+      const call  = Number(new FormData(form).get('call'));
+
+      // 見直し余地の簡易スコア
+      let score = price * 2;
+      if (data <= 2) score += 2;
+      if (data === 3) score += 1;
+      if (call === 1) score += 1;
+
+      let rank, title, minSave, maxSave, advice;
+
+      if (price === 1) {
+        rank = '見直し余地：小';
+        title = '今の料金は比較的抑えられています';
+        minSave = 0; maxSave = 12000;
+        advice = '月額だけを見ると、すでに低料金の可能性があります。無理に乗り換えず、不要なオプションやデータ容量の余りがないかを確認する程度で十分です。';
+      } else if (score >= 9) {
+        rank = '見直し余地：大';
+        title = '料金を下げられる可能性があります';
+        minSave = 36000; maxSave = 72000;
+        advice = '現在の料金と使い方の組み合わせでは、プラン変更や回線の見直しによる効果が出やすい可能性があります。特に、データ使用量に対して大きすぎるプランや不要なオプションがないか確認してみましょう。';
+      } else if (score >= 6) {
+        rank = '見直し余地：中';
+        title = '一度プランを比較する価値があります';
+        minSave = 18000; maxSave = 42000;
+        advice = '現在の契約内容によっては、年間でまとまった差が出る可能性があります。料金だけでなく、データ容量・通話・店舗サポートの必要性まで含めて比較するのがおすすめです。';
+      } else {
+        rank = '見直し余地：小〜中';
+        title = '条件次第で少し安くできる可能性があります';
+        minSave = 6000; maxSave = 24000;
+        advice = '大幅な変更より、不要オプションの整理や適正なデータ容量への変更が中心になりそうです。現在の利便性を落としてまで乗り換える必要はありません。';
+      }
+
+      document.getElementById('rankTag').textContent = rank;
+      document.getElementById('resultTitle').textContent = title;
+      document.getElementById('saving').textContent =
+        minSave === 0 ? '0〜約' + maxSave.toLocaleString() + '円' :
+        '約' + minSave.toLocaleString() + '〜' + maxSave.toLocaleString() + '円';
+      document.getElementById('advice').textContent = advice;
+
+      result.classList.add('show');
+      result.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  </script>
+</body>
+</html>
