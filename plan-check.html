@@ -81,7 +81,7 @@ h1{font-size:28px;line-height:1.3;margin:12px 0 6px}.lead{color:var(--muted);fon
 
 <script>
 (()=>{
-const s={}, email='mental.gunma@gmail.com';
+const s={};
 const ids=['q1','q2','q3','q4','q5','q6','res'];
 const bar=document.getElementById('bar');
 function show(n){ids.forEach(id=>document.getElementById(id).classList.add('hidden')); if(n<=6){document.getElementById('q'+n).classList.remove('hidden');bar.style.width=(n/6*100)+'%'}else{document.getElementById('res').classList.remove('hidden');bar.style.width='100%'} window.scrollTo({top:0,behavior:'smooth'});}
@@ -104,8 +104,8 @@ function result(){
  else if(best==='online'){icon='📲';type='オンライン専用プラン候補';title='オンライン専用プランも比較する価値があります';text='店舗サポートへの依存が低く、一定のデータ量を使うタイプです。料金と通信品質のバランスを取りやすい可能性があります。';next='現在の回線と同程度の通信品質が必要か、サポートをオンライン中心にできるかを確認しましょう。';}
  else{icon='💡';type='格安SIM比較候補';title='格安SIMを含めて比較する価値が高そうです';text='料金を重視し、データ使用量やサポート条件も格安SIMと相性がよい傾向です。ただし、現在の割引や端末条件を含めて総額で比較することが大切です。';next='月間データ量、通話量、現在の割引、端末残債を確認した上で、具体的な料金比較をすると判断しやすくなります。';}
  document.getElementById('icon').textContent=icon;document.getElementById('type').textContent=type;document.getElementById('title').textContent=title;document.getElementById('text').textContent=text;document.getElementById('next').textContent=next;
- const body='スマホ料金・見直し診断を利用しました。\n\n診断結果：'+type+'\n詳しい見直しについて相談を希望します。';
- document.getElementById('mail').href='mailto:'+email+'?subject='+encodeURIComponent('スマホ料金・見直し診断の相談')+'&body='+encodeURIComponent(body);
+ 
+ 
  show(7);
 }
 document.addEventListener('click',e=>{
